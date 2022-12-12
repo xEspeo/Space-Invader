@@ -134,7 +134,6 @@ namespace OpenCvSharp.Demo
 
             tex.LoadRawTextureData(buffer);
             tex.Apply();
-            print(tex);
 
             // Done with your temporary data, so you can dispose it.
             buffer.Dispose();
