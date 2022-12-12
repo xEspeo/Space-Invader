@@ -31,7 +31,7 @@ namespace OpenCvSharp.Demo
         {
             getTexture2();
             //getTexture();
-            laserDetection();
+            //laserDetection();
             Ray ray = new Ray(cam.transform.position, new Vector3(maxLoc.X, maxLoc.Y));
             RaycastHit hit;
 
@@ -66,7 +66,7 @@ namespace OpenCvSharp.Demo
             Cv2.MinMaxLoc(src, out double minVal, out double maxVal, out Point minLoc, out maxLoc, mask);
 
             Cv2.Circle(src, maxLoc.X, maxLoc.Y, 20, scalar_lred, 2, LineTypes.AntiAlias);
-            //Cv2.ImShow("Laser Tracking", mask);
+            Cv2.ImShow("Laser Tracking", src);
         }
 
         private void getTexture()
@@ -134,6 +134,9 @@ namespace OpenCvSharp.Demo
 
             tex.LoadRawTextureData(buffer);
             tex.Apply();
+
+            // Ich weiß eigentlich nicht ob die Methode überhaupt aufgerufen wird, weil keine Fehlermeldung kommt.
+            laserDetection();
 
             // Done with your temporary data, so you can dispose it.
             buffer.Dispose();
