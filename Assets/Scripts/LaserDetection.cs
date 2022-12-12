@@ -20,28 +20,17 @@ namespace OpenCvSharp.Demo
         [SerializeField] private RenderTexture renderTexture;
         private Texture2D tex;
 
-        public LaserDetection(ARCameraBackground aRCameraBackground, RenderTexture renderTexture)
-        {
-            this.arCameraBackground = aRCameraBackground;
-            this.renderTexture = renderTexture;
-            renderTexture = new RenderTexture(1440, 2960, 24, RenderTextureFormat.ARGB32);
-
-            RenderTexture.active = renderTexture;
-        }
-
         void Awake()
         {
-            //getTexture2();
-            getTexture();
-            print(tex.GetPixel(0, 0));
-            print(tex.GetPixel(100, 100));
+            arCameraBackground = GetComponent<ARCameraBackground>();
+            arCameraManager = GetComponent<ARCameraManager>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            //getTexture2();
-            getTexture();
+            getTexture2();
+            //getTexture();
             laserDetection();
             Ray ray = new Ray(cam.transform.position, new Vector3(maxLoc.X, maxLoc.Y));
             RaycastHit hit;
@@ -145,6 +134,7 @@ namespace OpenCvSharp.Demo
 
             tex.LoadRawTextureData(buffer);
             tex.Apply();
+            print(tex);
 
             // Done with your temporary data, so you can dispose it.
             buffer.Dispose();
